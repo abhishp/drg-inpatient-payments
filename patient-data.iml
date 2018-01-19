@@ -329,6 +329,19 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="pry-rails (vbundled(0.3.6)) [path][gem]">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/pry-rails-0.3.6/gemfiles" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/pry-rails-0.3.6/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/pry-rails-0.3.6/gemfiles" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/pry-rails-0.3.6/lib" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="puma (vbundled(3.11.1)) [path][gem]">
         <CLASSES>
           <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/puma-3.11.1/bin" />
