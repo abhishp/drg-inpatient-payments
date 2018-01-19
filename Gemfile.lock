@@ -47,6 +47,7 @@ GEM
     minitest (5.11.1)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
+    pg (0.21.0)
     puma (3.11.1)
     rack (2.0.3)
     rack-test (0.8.2)
@@ -99,6 +100,7 @@ DEPENDENCIES
   activesupport (~> 5.1.4)
   byebug
   listen
+  pg (~> 0.21)
   puma (~> 3.7)
   railties (~> 5.1.4)
   rspec-rails (~> 3.7)

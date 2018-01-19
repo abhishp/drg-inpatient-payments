@@ -4,8 +4,9 @@ This is a very simple system with an easy to use API to search patient data.
 
 ### Requirements
 
-* Ruby (~>2.4.1)
-* Rails (~>5.1.4)
+* Ruby (~> 2.4.1)
+* Rails (~> 5.1.4)
+* Postgresql (~> 9.6)
  
 ### Dev Setup
 
@@ -22,6 +23,11 @@ This is a very simple system with an easy to use API to search patient data.
     rbenv global 2.4.1
     ruby -v 
     ```
-
 2. Bundle Setup   
   `bundle install`
+
+3. Setup Database   
+    ```
+    rake db:setup
+    rake db:migrate
+    ```
