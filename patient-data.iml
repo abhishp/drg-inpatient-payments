@@ -5,22 +5,20 @@
       <configuration>
         <RAILS_FACET_CONFIG_ID NAME="RAILS_FACET_SUPPORT_REMOVED" VALUE="false" />
         <RAILS_FACET_CONFIG_ID NAME="RAILS_TESTS_SOURCES_PATCHED" VALUE="true" />
-        <RAILS_FACET_CONFIG_ID NAME="RAILS_FACET_APPLICATION_ROOT" VALUE="$MODULE_DIR$//Users/Abhishek/workspace/Playground/" />
+        <RAILS_FACET_CONFIG_ID NAME="RAILS_FACET_APPLICATION_ROOT" VALUE="$MODULE_DIR$" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/Users/Abhishek/workspace/Playground/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/Users/Abhishek/workspace/Playground/spec" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/Users/Abhishek/workspace/Playground/.bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/Users/Abhishek/workspace/Playground/components" />
-      <excludeFolder url="file://$MODULE_DIR$/Users/Abhishek/workspace/Playground/public/system" />
-      <excludeFolder url="file://$MODULE_DIR$/Users/Abhishek/workspace/Playground/tmp" />
-      <excludeFolder url="file://$MODULE_DIR$/Users/Abhishek/workspace/Playground/vendor/bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/Users/Abhishek/workspace/Playground/vendor/cache" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/.bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/components" />
+      <excludeFolder url="file://$MODULE_DIR$/public/system" />
+      <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/cache" />
     </content>
     <orderEntry type="jdk" jdkName="rbenv: 2.4.1" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -176,6 +174,38 @@
         <JAVADOC />
         <SOURCES>
           <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/erubi-1.7.0/lib" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="factory_bot (vbundled(4.8.2)) [path][gem]">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot-4.8.2/gemfiles" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot-4.8.2/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot-4.8.2/gemfiles" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot-4.8.2/lib" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="factory_bot_rails (vbundled(4.8.2)) [path][gem]">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot_rails-4.8.2/lib" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot_rails-4.8.2/bin" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot_rails-4.8.2/features" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot_rails-4.8.2/gemfiles" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot_rails-4.8.2/tmp" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot_rails-4.8.2/lib" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot_rails-4.8.2/bin" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot_rails-4.8.2/features" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot_rails-4.8.2/gemfiles" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/factory_bot_rails-4.8.2/tmp" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -531,6 +561,27 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="shoulda-matchers (vbundled(3.1.2)) [path][gem]">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/.hound" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/script" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/doc_config" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/gemfiles" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/lib" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/tasks" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/.hound" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/script" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/doc_config" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/gemfiles" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/lib" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/shoulda-matchers-3.1.2/tasks" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="thor (vbundled(0.20.0)) [path][gem]">
         <CLASSES>
           <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/thor-0.20.0/lib" />
@@ -572,5 +623,9 @@
       </library>
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.16.1, rbenv: 2.4.1) [gem]" level="application" />
+  </component>
+  <component name="RModuleSettingsStorage">
+    <LOAD_PATH number="0" />
+    <I18N_FOLDERS number="1" string0="$MODULE_DIR$/config/locales" />
   </component>
 </module>
