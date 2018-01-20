@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120151851) do
+ActiveRecord::Schema.define(version: 20180120153408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(version: 20180120151851) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["definition"], name: "unique_constraint_diagnostic_related_groups_on_definition", unique: true
+  end
+
+  create_table "drg_provider_details", force: :cascade do |t|
+    t.integer "total_discharges", null: false
+    t.float "average_covered_charges", null: false
+    t.float "average_total_payments", null: false
+    t.float "average_medicare_payments", null: false
+    t.bigint "health_care_provider_id"
+    t.bigint "diagnostic_related_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["diagnostic_related_group_id"], name: "index_drg_provider_details_on_diagnostic_related_group_id"
+    t.index ["health_care_provider_id"], name: "index_drg_provider_details_on_health_care_provider_id"
   end
 
   create_table "health_care_providers", force: :cascade do |t|
@@ -55,6 +68,8 @@ ActiveRecord::Schema.define(version: 20180120151851) do
   end
 
   add_foreign_key "cities", "states", on_delete: :cascade
+  add_foreign_key "drg_provider_details", "diagnostic_related_groups", on_delete: :cascade
+  add_foreign_key "drg_provider_details", "health_care_providers", on_delete: :cascade
   add_foreign_key "health_care_providers", "cities", on_delete: :cascade
   add_foreign_key "health_care_providers", "hospital_referral_regions", on_delete: :cascade
 end

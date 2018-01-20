@@ -6,4 +6,6 @@ class HealthCareProvider < ApplicationRecord
 
   belongs_to :city
   belongs_to :hospital_referral_region
+  has_many :drg_provider_details
+  has_many :diagnostic_related_groups, through: :drg_provider_details
 end
