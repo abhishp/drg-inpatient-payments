@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120134730) do
+ActiveRecord::Schema.define(version: 20180120151851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20180120134730) do
     t.string "name", limit: 50, null: false
     t.integer "state_id", null: false
     t.index ["state_id"], name: "index_cities_on_state_id"
+  end
+
+  create_table "diagnostic_related_groups", force: :cascade do |t|
+    t.string "definition", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["definition"], name: "unique_constraint_diagnostic_related_groups_on_definition", unique: true
   end
 
   create_table "health_care_providers", force: :cascade do |t|
