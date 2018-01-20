@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120123515) do
+ActiveRecord::Schema.define(version: 20180120134730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,18 @@ ActiveRecord::Schema.define(version: 20180120123515) do
     t.string "name", limit: 50, null: false
     t.integer "state_id", null: false
     t.index ["state_id"], name: "index_cities_on_state_id"
+  end
+
+  create_table "health_care_providers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "street", null: false
+    t.integer "zip_code", null: false
+    t.bigint "city_id"
+    t.bigint "hospital_referral_region_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_health_care_providers_on_city_id"
+    t.index ["hospital_referral_region_id"], name: "index_health_care_providers_on_hospital_referral_region_id"
   end
 
   create_table "hospital_referral_regions", force: :cascade do |t|
@@ -36,4 +48,6 @@ ActiveRecord::Schema.define(version: 20180120123515) do
   end
 
   add_foreign_key "cities", "states", on_delete: :cascade
+  add_foreign_key "health_care_providers", "cities", on_delete: :cascade
+  add_foreign_key "health_care_providers", "hospital_referral_regions", on_delete: :cascade
 end
