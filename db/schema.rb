@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180119201815) do
+ActiveRecord::Schema.define(version: 20180120084300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.integer "state_id", null: false
+    t.index ["state_id"], name: "index_cities_on_state_id"
+  end
 
   create_table "states", force: :cascade do |t|
     t.string "abbreviation", limit: 2, null: false
@@ -22,4 +28,5 @@ ActiveRecord::Schema.define(version: 20180119201815) do
     t.index ["name"], name: "unique_constraint_states_on_name", unique: true
   end
 
+  add_foreign_key "cities", "states", on_delete: :cascade
 end

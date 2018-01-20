@@ -35,4 +35,16 @@ describe State, type: :model do
     end
   end
 
+  context 'associations' do
+    it 'should delete all cities associated with the state on destroy' do
+      state = create(:state)
+      create_list(:city, 5, state: state)
+
+      expect(City.where(state_id: state.id)).not_to be_empty
+
+      state.destroy
+
+      expect(City.where(state_id: state.id)).to be_empty
+    end
+  end
 end
