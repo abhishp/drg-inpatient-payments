@@ -23,4 +23,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'factory_bot_rails', '~> 4.8'
+  gem 'smarter_csv', '~> 1.2', require: false
 end
