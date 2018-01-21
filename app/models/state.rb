@@ -7,6 +7,8 @@ class State < ApplicationRecord
   before_save :titleize_name, :make_abbreviation_upper_case
 
   has_many :cities, dependent: :delete_all
+  has_many :health_care_providers, through: :cities
+  has_many :drg_provider_details, through: :health_care_providers
 
   private
 

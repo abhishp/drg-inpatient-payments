@@ -1,0 +1,1 @@
+QueryResult = Struct.new(:records, :total_record_count, :page, :page_size)
