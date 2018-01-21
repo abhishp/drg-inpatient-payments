@@ -240,6 +240,19 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
+      <library name="jbuilder (vbundled(2.7.0)) [path][gem]">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/jbuilder-2.7.0/lib" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/jbuilder-2.7.0/gemfiles" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/jbuilder-2.7.0/lib" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/jbuilder-2.7.0/gemfiles" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
       <library name="listen (vbundled(3.1.5)) [path][gem]">
         <CLASSES>
           <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/listen-3.1.5/bin" />
@@ -297,6 +310,17 @@
         <JAVADOC />
         <SOURCES>
           <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/minitest-5.11.1/lib" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="multi_json (vbundled(1.13.1)) [path][gem]">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/multi_json-1.13.1/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/multi_json-1.13.1/lib" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -413,6 +437,17 @@
         <JAVADOC />
         <SOURCES>
           <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/rack-test-0.8.2/lib" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="rails-controller-testing (vbundled(1.0.2)) [path][gem]">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/rails-controller-testing-1.0.2/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/rails-controller-testing-1.0.2/lib" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -630,6 +665,36 @@
         <JAVADOC />
         <SOURCES>
           <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/tzinfo-1.2.4/lib" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="will_paginate (vbundled(3.1.6)) [path][gem]">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/will_paginate-3.1.6/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/will_paginate-3.1.6/lib" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="yajl-ruby (vbundled(1.3.1)) [path][gem]">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/yajl-ruby-1.3.1/script" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/yajl-ruby-1.3.1/lib" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/yajl-ruby-1.3.1/benchmark" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/yajl-ruby-1.3.1/tasks" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/yajl-ruby-1.3.1/ext" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/yajl-ruby-1.3.1/script" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/yajl-ruby-1.3.1/lib" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/yajl-ruby-1.3.1/benchmark" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/yajl-ruby-1.3.1/tasks" />
+          <root url="file://$MODULE_DIR$/vendor/bundle/ruby/2.4.0/gems/yajl-ruby-1.3.1/ext" />
         </SOURCES>
       </library>
     </orderEntry>

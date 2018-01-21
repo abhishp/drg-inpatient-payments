@@ -1,0 +1,1 @@
+json.array! @drg_provider_details, partial: 'drg_provider_details/show', as: :drg_provider_detail

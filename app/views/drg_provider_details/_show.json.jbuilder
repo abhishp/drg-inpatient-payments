@@ -1,0 +1,6 @@
+json.partial!('health_care_providers/show', health_care_provider: drg_provider_detail.health_care_provider)
+
+json.totalDischarges drg_provider_detail.total_discharges
+json.averageCoveredCharges drg_provider_detail.average_covered_charges
+json.averageMedicarePayments drg_provider_detail.average_medicare_payments
+json.averageTotalPayments drg_provider_detail.average_total_payments
