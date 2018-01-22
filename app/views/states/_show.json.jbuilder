@@ -1,1 +1,1 @@
-json.providerState state.abbreviation
+json.provider_state state.abbreviation

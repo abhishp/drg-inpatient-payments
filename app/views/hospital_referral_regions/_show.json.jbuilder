@@ -1,1 +1,1 @@
-json.hospitalReferralRegionDescription hospital_referral_region.description
+json.hospital_referral_region_description hospital_referral_region.description

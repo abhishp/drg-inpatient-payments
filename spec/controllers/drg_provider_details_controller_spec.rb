@@ -5,8 +5,8 @@ RSpec.describe DrgProviderDetailsController, type: :controller do
 
   context '#index' do
     it 'should use DrgProviderDetailsQuery to fetch records' do
-      stubbed_query = OpenStruct.new(:valid? => true, execute: QueryResult.new([], 0, 1, 30))
-      expect(DrgProviderDetailsQuery).to receive(:new).with({}).and_return(stubbed_query)
+      expect_any_instance_of(DrgProviderDetailsQuery).to receive(:valid?).and_return(true)
+      expect_any_instance_of(DrgProviderDetailsQuery).to receive(:execute).and_return(QueryResult.new([], 0, 1, 30))
 
       get :index, format: :json
 
@@ -50,11 +50,42 @@ RSpec.describe DrgProviderDetailsController, type: :controller do
         expect(provider[:averageMedicarePayments]).to eq(drg_provider_detail.average_medicare_payments)
         expect(provider[:averageTotalPayments]).to eq(drg_provider_detail.average_total_payments)
       end
+
+      it 'should render only given fields when fields param is given' do
+        provider = create(:drg_provider_detail).health_care_provider
+
+        get :index, format: :json, params: {:fields => %w(providerName providerState)}
+
+        provider_details = JSON.parse(response.body, symbolize_names: true).first
+
+        expect(response.status).to eq(200)
+        expect(provider_details).to eq({providerName: provider.name, providerState: provider.city.state.abbreviation})
+      end
+
+      it 'should render only given field' do
+        create(:drg_provider_detail).health_care_provider
+
+        DrgProviderDetailFields::ALL_FIELDS.each do |field|
+          field = field.to_s.camelize(:lower)
+
+          get :index, format: :json, params: {'fields[]' => field }
+
+          provider_details = JSON.parse(response.body).first
+          expect(response.status).to eq(200)
+          expect(provider_details.keys).to eq([field])
+        end
+      end
     end
 
     context 'invalid request' do
-      it 'should return bad request status' do
+      it 'should return status as bad request when query params are wrong' do
         get :index, format: :json, params: {page: -1}
+
+        expect(response.status).to eq(400)
+      end
+
+      it 'should return status as bad request when fields params are invalid' do
+        get :index, format: :json, params: {'fields[]' =>  'blah'}
 
         expect(response.status).to eq(400)
       end

@@ -1,8 +1,9 @@
 class DrgProviderDetailsController < ApplicationController
 
   def index
-    query = DrgProviderDetailsQuery.new(search_params.to_h)
-    if query.valid?
+    @fields = DrgProviderDetailFields.new(fields)
+    query = DrgProviderDetailsQuery.new(search_params.to_h, @fields)
+    if query.valid? && @fields.valid?
       query_result = query.execute
       @drg_provider_details = query_result.records
       response.set_header('X-Total-Record-Count', query_result.total_record_count)
@@ -14,6 +15,9 @@ class DrgProviderDetailsController < ApplicationController
   end
 
   private
+  def fields
+    params.permit(fields: []).delete(:fields)
+  end
 
   def search_params
     params.permit(:page, :page_size, :state,

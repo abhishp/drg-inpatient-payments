@@ -1,6 +1,7 @@
-json.partial!('health_care_providers/show', health_care_provider: drg_provider_detail.health_care_provider)
+if @fields.include_provider?
+  json.partial! 'health_care_providers/show', health_care_provider: drg_provider_detail.health_care_provider
+end
 
-json.totalDischarges drg_provider_detail.total_discharges
-json.averageCoveredCharges drg_provider_detail.average_covered_charges
-json.averageMedicarePayments drg_provider_detail.average_medicare_payments
-json.averageTotalPayments drg_provider_detail.average_total_payments
+
+json.(drg_provider_detail, *@fields.included(:total_discharges, :average_covered_charges, :average_medicare_payments,
+                                             :average_total_payments))

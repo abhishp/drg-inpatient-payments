@@ -279,5 +279,91 @@ RSpec.describe DrgProviderDetailsQuery, type: :model do
         expect(result.total_record_count).to eq(2)
       end
     end
+
+    context 'associations' do
+      it 'should include all associations when state and hospital referral region is in fields' do
+        stubbed_fields_helper = double(DrgProviderDetailFields)
+        expect(stubbed_fields_helper).to receive(:include_state?).and_return(true)
+        expect(stubbed_fields_helper).to receive(:include_hospital_referral_region?).and_return(true)
+        query = DrgProviderDetailsQuery.new({}, stubbed_fields_helper)
+
+        query.execute
+
+        expect(query.instance_variable_get("@associations")).to eq({health_care_provider: [{city: :state}, :hospital_referral_region]})
+      end
+
+      it 'should include health_care_provider, city and state associations when state is in fields and hospital referral region is not in fields' do
+        stubbed_fields_helper = double(DrgProviderDetailFields)
+        expect(stubbed_fields_helper).to receive(:include_state?).twice.and_return(true)
+        expect(stubbed_fields_helper).to receive(:include_hospital_referral_region?).and_return(false)
+        query = DrgProviderDetailsQuery.new({}, stubbed_fields_helper)
+
+        query.execute
+
+        expect(query.instance_variable_get("@associations")).to eq({health_care_provider: {city: :state}})
+      end
+
+      it 'should include health_care_provider, city and hospital_referral_region associations when city and hospital referral region is in fields and state is not included' do
+        stubbed_fields_helper = double(DrgProviderDetailFields)
+        expect(stubbed_fields_helper).to receive(:include_state?).twice.and_return(false)
+        expect(stubbed_fields_helper).to receive(:include_hospital_referral_region?).and_return(true)
+        expect(stubbed_fields_helper).to receive(:include_city?).and_return(true)
+        query = DrgProviderDetailsQuery.new({}, stubbed_fields_helper)
+
+        query.execute
+
+        expect(query.instance_variable_get("@associations")).to eq({health_care_provider: [:hospital_referral_region, :city]})
+      end
+
+      it 'should include health_care_provider and hospital_referral_region associations when hospital referral region is in fields and state and city are not included' do
+        stubbed_fields_helper = double(DrgProviderDetailFields)
+        expect(stubbed_fields_helper).to receive(:include_state?).twice.and_return(false)
+        expect(stubbed_fields_helper).to receive(:include_hospital_referral_region?).and_return(true)
+        expect(stubbed_fields_helper).to receive(:include_city?).and_return(false)
+        query = DrgProviderDetailsQuery.new({}, stubbed_fields_helper)
+
+        query.execute
+
+        expect(query.instance_variable_get("@associations")).to eq({health_care_provider: [:hospital_referral_region]})
+      end
+
+      it 'should include health_care_provider and city associations when both state and hospital referral region are not in fields and city is in fields' do
+        stubbed_fields_helper = double(DrgProviderDetailFields)
+        expect(stubbed_fields_helper).to receive(:include_state?).twice.and_return(false)
+        expect(stubbed_fields_helper).to receive(:include_hospital_referral_region?).and_return(false)
+        expect(stubbed_fields_helper).to receive(:include_city?).and_return(true)
+        query = DrgProviderDetailsQuery.new({}, stubbed_fields_helper)
+
+        query.execute
+
+        expect(query.instance_variable_get("@associations")).to eq({health_care_provider: :city})
+      end
+
+      it 'should include health_care_provider association when all city, state and hospital referral region are not in fields and provider fields are present' do
+        stubbed_fields_helper = double(DrgProviderDetailFields)
+        expect(stubbed_fields_helper).to receive(:include_state?).twice.and_return(false)
+        expect(stubbed_fields_helper).to receive(:include_hospital_referral_region?).and_return(false)
+        expect(stubbed_fields_helper).to receive(:include_city?).and_return(false)
+        expect(stubbed_fields_helper).to receive(:include_provider?).and_return(true)
+        query = DrgProviderDetailsQuery.new({}, stubbed_fields_helper)
+
+        query.execute
+
+        expect(query.instance_variable_get("@associations")).to eq(:health_care_provider)
+      end
+
+      it 'should not include any association when all city, state, provider fields and hospital referral region are not in fields' do
+        stubbed_fields_helper = double(DrgProviderDetailFields)
+        expect(stubbed_fields_helper).to receive(:include_state?).twice.and_return(false)
+        expect(stubbed_fields_helper).to receive(:include_hospital_referral_region?).and_return(false)
+        expect(stubbed_fields_helper).to receive(:include_city?).and_return(false)
+        expect(stubbed_fields_helper).to receive(:include_provider?).and_return(false)
+        query = DrgProviderDetailsQuery.new({}, stubbed_fields_helper)
+
+        query.execute
+
+        expect(query.instance_variable_get("@associations")).to be_nil
+      end
+    end
   end
 end

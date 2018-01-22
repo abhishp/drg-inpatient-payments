@@ -1,13 +1,14 @@
-VALID_FILTERS = [
-    :state, :page, :page_size,
-    :min_discharges, :max_discharges,
-    :min_average_covered_charges, :max_average_covered_charges,
-    :min_average_medicare_payments, :max_average_medicare_payments,
-    :min_average_total_payments, :max_average_total_payments
-]
-
-class DrgProviderDetailsQuery < Struct.new(*VALID_FILTERS)
+class DrgProviderDetailsQuery
   include ActiveModel::Validations
+  VALID_FILTERS = [
+      :state, :page, :page_size,
+      :min_discharges, :max_discharges,
+      :min_average_covered_charges, :max_average_covered_charges,
+      :min_average_medicare_payments, :max_average_medicare_payments,
+      :min_average_total_payments, :max_average_total_payments
+  ]
+
+  QueryParams = Struct.new(*VALID_FILTERS)
 
   validates :page, :page_size, numericality: {only_integer: true, greater_than: 0}
 
@@ -24,12 +25,16 @@ class DrgProviderDetailsQuery < Struct.new(*VALID_FILTERS)
             format: {with: /\A[A-Z]{2}\z/}, allow_blank: true, allow_nil: true,
             inclusion: { in: State.pluck(:abbreviation) }
 
-  def initialize(query_params={})
+  VALID_FILTERS.each do |filter|
+    delegate filter, "#{filter}=", to: :@query_params
+  end
+
+  def initialize(query_params = {}, fields_helper = DrgProviderDetailFields.new)
     query_params = query_params.symbolize_keys.slice(*VALID_FILTERS)
     query_params = defaults.merge(query_params) {|_, default, value| value.blank? ? default : value }
-    super(*query_params.values_at(*VALID_FILTERS))
+    @query_params = QueryParams.new(*query_params.values_at(*VALID_FILTERS))
     @relation = DrgProviderDetail.all
-    @includes = {health_care_provider: [{city: :state}, :hospital_referral_region]}
+    @fields = fields_helper
   end
 
   def execute
@@ -56,12 +61,16 @@ class DrgProviderDetailsQuery < Struct.new(*VALID_FILTERS)
   end
 
   def build
+    build_query
+    build_associations
+  end
+
+  def build_query
     for_state
     with_total_discharges
     with_average_covered_charges
     with_average_medicare_payments
     with_average_total_payments
-    including_associations
   end
 
   def for_state
@@ -104,7 +113,25 @@ class DrgProviderDetailsQuery < Struct.new(*VALID_FILTERS)
     @relation = @relation.where(average_total_payments: min_average_total_payments.to_f..max_average_total_payments.to_f)
   end
 
-  def including_associations
-    @relation = @relation.includes(@includes)
+  def build_associations
+    @associations = if @fields.include_state? && @fields.include_hospital_referral_region?
+                      {health_care_provider: [{city: :state}, :hospital_referral_region]}
+                    elsif @fields.include_state?
+                      {health_care_provider: {city: :state}}
+                    elsif @fields.include_hospital_referral_region?
+                      dependencies = [:hospital_referral_region]
+                      dependencies << :city if @fields.include_city?
+                      {health_care_provider: dependencies}
+                    elsif @fields.include_city?
+                      {health_care_provider: :city}
+                    elsif @fields.include_provider?
+                      :health_care_provider
+                    else
+                      nil
+                    end
+    return unless @associations
+
+    @relation = @relation.includes(@associations)
   end
+
 end
