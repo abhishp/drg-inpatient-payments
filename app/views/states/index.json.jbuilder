@@ -1,0 +1,1 @@
+json.array! @states, :abbreviation, :name
