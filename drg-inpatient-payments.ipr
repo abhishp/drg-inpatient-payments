@@ -9,10 +9,10 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/patient-data.iml" filepath="$PROJECT_DIR$/patient-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/drg-inpatient-payments.iml" filepath="$PROJECT_DIR$/drg-inpatient-payments.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" project-jdk-name="rbenv: 2.4.1" project-jdk-type="RUBY_SDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" default="false" project-jdk-name="rbenv: 2.3.5" project-jdk-type="RUBY_SDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="PropertiesComponent">

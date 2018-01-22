@@ -8,21 +8,20 @@ default: &default
   adapter: postgresql
   encoding: utf-8
   pool: <%= ENV.fetch('RAILS_MAX_THREADS', 5) %>
-  timeout: 5000
-  username: <%= ENV.fetch('DB_USER') { ENV['USER'] } %>
-  password: <%= ENV.fetch('DB_PASSWORD', '') %>
 
 development:
   <<: *default
-  database: patient_data_development
+  database: drg-inpatient-payments_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: patient_data_test
+  database: drg-inpatient-payments_test
 
 production:
   <<: *default
-  database: patient_data_production
+  database: drg-inpatient-payments_development
+  username: drg-inpatient-payments
+  password: <%= ENV.fetch('DRG-INPATIENT-PAYMENTS_DATABASE_PASSWORD','') %>
