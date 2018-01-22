@@ -19,9 +19,12 @@ development:
 test:
   <<: *default
   database: drg-inpatient-payments_test
+  host: localhost
 
 production:
   <<: *default
-  database: drg-inpatient-payments_development
-  username: drg-inpatient-payments
-  password: <%= ENV.fetch('DRG-INPATIENT-PAYMENTS_DATABASE_PASSWORD','') %>
+  database: <%= ENV['RDS_DB_NAME'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: <%= ENV['RDS_PORT'] %>

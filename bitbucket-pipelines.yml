@@ -1,0 +1,39 @@
+image: ruby:2.3.5
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - bundler
+        script: # Modify the commands below to build your repository.
+          - export RAILS_ENV=test
+          - bundle install --path vendor/bundle
+          - rake db:setup
+          - rake db:test:prepare
+          - rspec --exclude-pattern "**/lib/*_spec.rb"
+        services:
+          - postgres
+    - step:
+        caches:
+          - pip
+        script:
+          - apt-get update && apt-get install -y python-dev
+          - curl -O https://bootstrap.pypa.io/get-pip.py
+          - python get-pip.py
+          - pip install awsebcli --upgrade
+          - pip install awscli --upgrade
+          - aws --version
+          - eb init drg-inpatient-payments-system -r us-west-1 -p arn:aws:elasticbeanstalk:us-west-1::platform/Puma with Ruby 2.3 running on 64bit Amazon Linux/2.5.0
+          - eb deploy DrgInpatientPaymentsSystem-live
+
+definitions:
+  caches:
+    bundler: vendor/bundle
+    pip: ~/.cache/pip
+  services:
+    postgres:
+      image: postgres
+      environment:
+        POSTGRES_DB: 'drg-inpatient-payments_test'
+        POSTGRES_USER: 'root'
+        POSTGRES_PASSWORD: 'test_user_password'
