@@ -41,7 +41,7 @@ class DrgProviderDetailFields
 
   def validate
     @fields.each do |field|
-      @errors[field] = { error: :is_not_valid_field } unless  ALL_FIELDS.include?(field)
+      @errors[field] = ['is not a valid field'] unless  ALL_FIELDS.include?(field)
     end
   end
 end

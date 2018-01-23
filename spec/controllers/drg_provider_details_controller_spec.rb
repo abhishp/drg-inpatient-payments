@@ -89,6 +89,22 @@ RSpec.describe DrgProviderDetailsController, type: :controller do
 
         expect(response.status).to eq(400)
       end
+
+      it 'should render query errors as json' do
+        get :index, format: :json, params: {page: -1}
+
+        expect(response.status).to eq(400)
+
+        expect(JSON.parse(response.body, symbolize_names: true)[:query_filters]).to eq({page: ['must be greater than 0']})
+      end
+
+      it 'should render field errors as json' do
+        get :index, format: :json, params: {'fields[]' =>  'blah'}
+
+        expect(response.status).to eq(400)
+
+        expect(JSON.parse(response.body, symbolize_names: true)[:fields]).to eq({blah: ['is not a valid field']})
+      end
     end
 
     context 'pagination' do

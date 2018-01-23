@@ -9,9 +9,9 @@ RSpec.describe DrgProviderDetailFields do
       fields = DrgProviderDetailFields.new(invalid_fields + valid_fields)
 
       expect(fields).not_to be_valid
-      expect(fields.errors[:some_random_field]).to eq({ error: :is_not_valid_field })
-      expect(fields.errors[:other_random_field]).to eq({ error: :is_not_valid_field })
-      expect(fields.errors[:another_random_field]).to eq({ error: :is_not_valid_field })
+      expect(fields.errors[:some_random_field]).to eq(['is not a valid field'])
+      expect(fields.errors[:other_random_field]).to eq(['is not a valid field'])
+      expect(fields.errors[:another_random_field]).to eq(['is not a valid field'])
     end
 
     it 'should be valid for all valid fields' do

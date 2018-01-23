@@ -10,7 +10,7 @@ class DrgProviderDetailsController < ApplicationController
       response.set_header('X-Page-Number', query_result.page)
       response.set_header('X-Page-Size', query_result.page_size)
     else
-      render status: :bad_request
+      render status: :bad_request, json: {query_filters: query.errors, fields: @fields.errors}
     end
   end
 
