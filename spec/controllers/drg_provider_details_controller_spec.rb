@@ -114,8 +114,8 @@ RSpec.describe DrgProviderDetailsController, type: :controller do
         get :index, format: :json, params: {page: 3, page_size: 2}
 
         expect(response.get_header('X-Total-Record-Count')).to eq(8)
-        expect(response.get_header('X-Page-Number')).to eq('3')
-        expect(response.get_header('X-Page-Size')).to eq('2')
+        expect(response.get_header('X-Page-Number')).to eq(3)
+        expect(response.get_header('X-Page-Size')).to eq(2)
       end
 
     end

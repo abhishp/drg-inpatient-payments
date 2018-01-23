@@ -1,38 +1,62 @@
 class DrgProviderDetailsQuery
   include ActiveModel::Validations
-  VALID_FILTERS = [
-      :state, :page, :page_size,
-      :min_discharges, :max_discharges,
+  INTEGER_FILTERS = [:page, :page_size, :min_discharges, :max_discharges]
+  FLOAT_FILTERS = [
       :min_average_covered_charges, :max_average_covered_charges,
       :min_average_medicare_payments, :max_average_medicare_payments,
       :min_average_total_payments, :max_average_total_payments
   ]
+  VALID_FILTERS = [:state] + INTEGER_FILTERS + FLOAT_FILTERS
+
+  DEFAULTS = {
+      page: 1,
+      page_size: 30,
+      min_discharges: -Float::INFINITY,
+      min_average_covered_charges: -Float::INFINITY,
+      min_average_medicare_payments: -Float::INFINITY,
+      min_average_total_payments: -Float::INFINITY,
+      max_discharges: Float::INFINITY,
+      max_average_covered_charges: Float::INFINITY,
+      max_average_medicare_payments: Float::INFINITY,
+      max_average_total_payments: Float::INFINITY
+  }
 
   QueryParams = Struct.new(*VALID_FILTERS)
 
   validates :page, :page_size, numericality: {only_integer: true, greater_than: 0}
 
-  validates_with Validators::NumericFilterValidator,
-                 attributes: [:max_discharges, :min_discharges],
+  validates_with Validators::NumericFilterValidator, attributes: [:min_discharges],
                  only_integer: true, greater_than_or_equal_to: 0, allow_infinity: true
 
   validates_with Validators::NumericFilterValidator,
-                 attributes: [:min_average_total_payments, :min_average_covered_charges, :min_average_medicare_payments,
-                              :max_average_total_payments, :max_average_covered_charges, :max_average_medicare_payments],
+                 attributes: [:min_average_covered_charges, :min_average_medicare_payments, :min_average_total_payments],
                  greater_than_or_equal_to: 0, allow_infinity: true
 
-  validates :state,
-            format: {with: /\A[A-Z]{2}\z/}, allow_blank: true, allow_nil: true,
-            inclusion: { in: State.pluck(:abbreviation) }
+  validates_with Validators::NumericFilterValidator, attributes: [:max_discharges],
+                 greater_than_or_equal_to: :min_discharges, allow_infinity: true, only_integer: true,
+                 message: 'must be greater than or equal to min_discharges'
+
+  validates_with Validators::NumericFilterValidator, attributes: [:max_average_covered_charges],
+                 greater_than_or_equal_to: :min_average_covered_charges, allow_infinity: true,
+                 message: 'must be greater than or equal to min_average_covered_charges'
+
+  validates_with Validators::NumericFilterValidator, attributes: [:max_average_medicare_payments],
+                 greater_than_or_equal_to: :min_average_medicare_payments, allow_infinity: true,
+                 message: 'must be greater than or equal to min_average_medicare_payments'
+
+  validates_with Validators::NumericFilterValidator, attributes: [:max_average_total_payments],
+                 greater_than_or_equal_to: :min_average_total_payments, allow_infinity: true,
+                 message: 'must be greater than or equal to min_average_total_payments'
+
+  validates :state, format: {with: /\A[A-Z]{2}\z/}, allow_blank: true, allow_nil: true,
+            inclusion: {in: State.pluck(:abbreviation)}
 
   VALID_FILTERS.each do |filter|
     delegate filter, "#{filter}=", to: :@query_params
   end
 
   def initialize(query_params = {}, fields_helper = DrgProviderDetailFields.new)
-    query_params = query_params.symbolize_keys.slice(*VALID_FILTERS)
-    query_params = defaults.merge(query_params) {|_, default, value| value.blank? ? default : value }
-    @query_params = QueryParams.new(*query_params.values_at(*VALID_FILTERS))
+    @query_params = QueryParams.new(*parse_values_for_filters(query_params.symbolize_keys))
     @relation = DrgProviderDetail.all
     @fields = fields_helper
   end
@@ -45,19 +69,19 @@ class DrgProviderDetailsQuery
 
   private
 
-  def defaults
-    {
-        page: 1,
-        page_size: 30,
-        min_discharges: -Float::INFINITY,
-        min_average_covered_charges: -Float::INFINITY,
-        min_average_medicare_payments: -Float::INFINITY,
-        min_average_total_payments: -Float::INFINITY,
-        max_discharges: Float::INFINITY,
-        max_average_covered_charges: Float::INFINITY,
-        max_average_medicare_payments: Float::INFINITY,
-        max_average_total_payments: Float::INFINITY
-    }
+  def parse_values_for_filters(query_params)
+    VALID_FILTERS.map do |filter|
+      value = query_params[filter]
+      if value.blank?
+        DEFAULTS[filter]
+      elsif INTEGER_FILTERS.include?(filter)
+        value.to_s.to_i
+      elsif FLOAT_FILTERS.include?(filter)
+        value.to_s.to_f
+      else
+        value
+      end
+    end
   end
 
   def build
@@ -92,25 +116,25 @@ class DrgProviderDetailsQuery
   def with_total_discharges
     return if min_discharges.to_f.infinite? && max_discharges.to_f.infinite?
 
-    @relation = @relation.where(total_discharges: min_discharges.to_f..max_discharges.to_f)
+    @relation = @relation.where(total_discharges: min_discharges..max_discharges)
   end
 
   def with_average_covered_charges
-    return if min_average_covered_charges.to_f.infinite? && max_average_covered_charges.to_f.infinite?
+    return if min_average_covered_charges.infinite? && max_average_covered_charges.infinite?
 
-    @relation = @relation.where(average_covered_charges: min_average_covered_charges.to_f..max_average_covered_charges.to_f)
+    @relation = @relation.where(average_covered_charges: min_average_covered_charges..max_average_covered_charges)
   end
 
   def with_average_medicare_payments
-    return if min_average_medicare_payments.to_f.infinite? && max_average_medicare_payments.to_f.infinite?
+    return if min_average_medicare_payments.infinite? && max_average_medicare_payments.infinite?
 
-    @relation = @relation.where(average_medicare_payments: min_average_medicare_payments.to_f..max_average_medicare_payments.to_f)
+    @relation = @relation.where(average_medicare_payments: min_average_medicare_payments..max_average_medicare_payments)
   end
 
   def with_average_total_payments
-    return if min_average_total_payments.to_f.infinite? && max_average_total_payments.to_f.infinite?
+    return if min_average_total_payments.infinite? && max_average_total_payments.infinite?
 
-    @relation = @relation.where(average_total_payments: min_average_total_payments.to_f..max_average_total_payments.to_f)
+    @relation = @relation.where(average_total_payments: min_average_total_payments..max_average_total_payments)
   end
 
   def build_associations

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DrgProviderDetailsQuery, type: :model do
   context 'validations' do
-
+    subject { build(:drg_provider_details_query) }
     it {should validate_numericality_of(:page).is_greater_than(0).only_integer }
 
     it {should validate_numericality_of(:page_size).is_greater_than(0).only_integer }
@@ -10,25 +10,33 @@ RSpec.describe DrgProviderDetailsQuery, type: :model do
     it {should validate_numericality_of(:min_discharges).is_greater_than_or_equal_to(0).only_integer }
     it {should allow_values(Float::INFINITY, -Float::INFINITY).for(:min_discharges) }
 
-    it {should validate_numericality_of(:max_discharges).is_greater_than_or_equal_to(0).only_integer }
+    it {should validate_numericality_of(:max_discharges)
+                   .is_greater_than_or_equal_to(subject.min_discharges)
+                   .only_integer.with_message('must be greater than or equal to min_discharges')}
     it {should allow_values(Float::INFINITY, -Float::INFINITY).for(:max_discharges) }
 
     it {should validate_numericality_of(:min_average_covered_charges).is_greater_than_or_equal_to(0) }
     it {should allow_values(Float::INFINITY, -Float::INFINITY).for(:min_average_covered_charges) }
 
-    it {should validate_numericality_of(:max_average_covered_charges).is_greater_than_or_equal_to(0) }
+    it {should validate_numericality_of(:max_average_covered_charges)
+                   .is_greater_than_or_equal_to(subject.min_average_covered_charges)
+                   .with_message('must be greater than or equal to min_average_covered_charges') }
     it {should allow_values(Float::INFINITY, -Float::INFINITY).for(:max_average_covered_charges) }
 
     it {should validate_numericality_of(:min_average_medicare_payments).is_greater_than_or_equal_to(0) }
     it {should allow_values(Float::INFINITY, -Float::INFINITY).for(:min_average_medicare_payments) }
 
-    it {should validate_numericality_of(:max_average_medicare_payments).is_greater_than_or_equal_to(0) }
+    it {should validate_numericality_of(:max_average_medicare_payments)
+                   .is_greater_than_or_equal_to(subject.min_average_medicare_payments)
+                   .with_message('must be greater than or equal to min_average_medicare_payments')}
     it {should allow_values(Float::INFINITY, -Float::INFINITY).for(:max_average_medicare_payments) }
 
     it {should validate_numericality_of(:min_average_total_payments).is_greater_than_or_equal_to(0) }
     it {should allow_values(Float::INFINITY, -Float::INFINITY).for(:min_average_total_payments) }
 
-    it {should validate_numericality_of(:max_average_total_payments).is_greater_than_or_equal_to(0) }
+    it {should validate_numericality_of(:max_average_total_payments)
+                   .is_greater_than_or_equal_to(subject.min_average_total_payments)
+                   .with_message('must be greater than or equal to min_average_total_payments')}
     it {should allow_values(Float::INFINITY, -Float::INFINITY).for(:max_average_total_payments) }
 
     it 'should allow value of state only within states stored in db' do
@@ -54,7 +62,7 @@ RSpec.describe DrgProviderDetailsQuery, type: :model do
       query = DrgProviderDetailsQuery.new(foo: :bar)
 
       expect(query).to be_valid
-      expect(query.execute.records.to_a).to   eq([details])
+      expect(query.execute.records.to_a).to eq([details])
     end
 
     context 'paging' do
