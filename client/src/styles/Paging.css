@@ -1,0 +1,8 @@
+.pager li.active-page a {
+  background-color: #337ab7;
+  color: #eee;
+}
+
+.pager li.active-page a:hover {
+  background-color: #337ab7;
+}

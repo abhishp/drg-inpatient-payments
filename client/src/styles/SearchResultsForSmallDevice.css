@@ -1,0 +1,23 @@
+.search-result-for-small-device  tr:not(:first-child) {
+  color: black;
+  text-align: left;
+}
+
+.search-result-for-small-device  tr:not(:first-child) > td:before {
+  color: #666;
+}
+.total-discharges:before {
+  content: 'Total Discharges : '
+}
+
+.average-covered-charges:before {
+  content: 'Average Covered Charges : '
+}
+
+.average-medicare-payments:before {
+  content: 'Average Medicare Payments : '
+}
+
+.average-total-payments:before {
+  content: 'Average Total Payments : '
+}

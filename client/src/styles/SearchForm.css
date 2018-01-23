@@ -1,0 +1,34 @@
+.search-form {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.search-form  button.btn-primary.search-submit {
+  float: left;
+  margin-left: 15px;
+  padding: 5px 50px;
+}
+
+div.label-container {
+  text-align: right;
+}
+
+div.label-container:after {
+  content: ' : '
+}
+
+@media screen and (max-width: 991px) {
+  .search-form button.btn-primary.search-submit {
+    float: none;
+  }
+
+  div.label-container {
+    text-align: center;
+  }
+
+  div.label-container:after {
+    content: ''
+  }
+
+}
+

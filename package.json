@@ -1,0 +1,12 @@
+{
+  "name": "drg-inpatients-payments",
+  "engines" :{
+    "node": "6.3.1"
+  },
+  "author": "Abhishek Puri",
+  "scripts": {
+    "build": "cd client && npm install && npm run build && cd ..",
+    "deploy": "cp -a client/build/. public/",
+    "clientbuild": "npm run build && npm run deploy && echo 'Client built!'"
+  }
+}

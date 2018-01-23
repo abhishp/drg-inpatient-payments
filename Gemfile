@@ -12,6 +12,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'yajl-ruby', '~> 1.3.1'
 gem 'smarter_csv', '~> 1.2', require: false
 gem 'rack-cors', '~> 1.0.2'
+gem 'foreman', '~> 0.64.0'
 
 group :development do
   gem 'listen'

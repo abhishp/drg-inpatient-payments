@@ -1,0 +1,18 @@
+table.search-results .th-line-2 {
+  white-space: nowrap;
+}
+
+tr.search-result {
+  margin: 5%;
+  border-bottom: 1px solid #ddd;
+}
+
+tr.search-result:last-child {
+  border-bottom: none;
+}
+
+tr.search-result td {
+  padding: 2px;
+  text-align: left;
+  border-right: 1px solid #ddd;
+}
