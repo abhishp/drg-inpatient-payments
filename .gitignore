@@ -6,4 +6,5 @@
 /vendor
 
 .byebug_history
+/public/*
 drg-inpatient-payments.iws
