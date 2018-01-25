@@ -1,0 +1,13 @@
+/.bundle
+.rakeTasks
+.generators
+/log
+/tmp
+/vendor
+
+.byebug_history
+/drg-inpatient-payments.i*
+/bitbucket-pipelines.yml
+/package.json
+/client
+/spec
