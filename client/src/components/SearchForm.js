@@ -46,8 +46,10 @@ class SearchForm extends Component {
     return Object.values(this.state.validity).every(isValid => isValid);
   }
 
-  handleStateChange(state) {
-    this.setState({...this.state, state: state});
+  handleStateChange(newState) {
+    let {values} = this.state;
+    values.state = newState;
+    this.setState({...this.state, values});
   }
 
   handleNumericFilterChange(key, value, isValid) {
@@ -75,8 +77,7 @@ class SearchForm extends Component {
   renderNumericFilter(filterSpecs) {
     return <NumericFilter
         key={filterSpecs.key} id={filterSpecs.key} values={this.valuesForFilter(filterSpecs.key)}
-        name={filterSpecs.name} value={this.state.values[filterSpecs.key] || ''}
-        handleChange={this.handleNumericFilterChange}
+        name={filterSpecs.name} handleChange={this.handleNumericFilterChange}
         isMoney={filterSpecs.isMoney}/>
   }
 
@@ -85,15 +86,15 @@ class SearchForm extends Component {
         <Grid className={"search-form"} fluid>
           <Form horizontal itemID="search_form">
             <Row>
-              <Col xs={12} md={12} lg={12}>
+              <Col xs={12}>
                 <h2> Search </h2>
               </Col>
             </Row>
-            <StatesFilter handleChange={this.handleStateChange}/>
+            <StatesFilter handleChange={this.handleStateChange} value={this.state.values.state}/>
             {this.numericFilters.map(this.renderNumericFilter)}
             <Row>
-              <Col xs={12} md={4} lg={4} xsHidden/>
-              <Col xs={12} md={2} lg={2}>
+              <Col sm={5} md={4} xsHidden/>
+              <Col xs={12} sm={2}>
                 <Button type="submit" bsStyle="primary" className={"search-submit"} onClick={this.fetchResults} disabled={!this.isValid()}>
                   Search
                 </Button>

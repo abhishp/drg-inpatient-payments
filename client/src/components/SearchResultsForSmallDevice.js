@@ -5,13 +5,18 @@ import '../styles/SearchResultsForSmallDevice.css'
 class SearchResultsForSmallDevice extends Component {
   render() {
     return (
-        <Col xs={12} mdHidden lgHidden>
+        <Col xs={12} mdHidden lgHidden smHidden>
           {this.props.results.map((result, index) => {
             return <Table bordered condensed striped key={'searchResultForSmallDevice' + index}
                           className={"search-result-for-small-device"}>
               <tbody>
               <tr>
                 <td colSpan={2} className={"provider-name"}>{result.providerName}</td>
+              </tr>
+              <tr>
+                <td colSpan={2} className={"provider-address"}>
+                  {result.providerStreetAddress}, {result.providerCity}, {result.providerState} - {result.providerZipCode}
+                </td>
               </tr>
               <tr>
                 <td className={"total-discharges"}>{result.totalDischarges}</td>

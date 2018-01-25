@@ -72,19 +72,19 @@ class Paging extends Component {
   }
 
   renderFirstPageItem() {
-    return <Pager.Item key={"paginationFirstPageItem"}  eventKey={1} disabled={this.isOnFirstPage()}>&laquo;</Pager.Item>;
+    return this.isOnFirstPage()  ? null : <Pager.Item key={"paginationFirstPageItem"}  eventKey={1}>&laquo;</Pager.Item>;
   }
 
   renderLastPageItem() {
-    return <Pager.Item key={"paginationLastPageItem" } eventKey={this.totalPages} disabled={this.isOnLastPage()}>&raquo;</Pager.Item>;
+    return this.isOnLastPage() ? null : <Pager.Item key={"paginationLastPageItem" } eventKey={this.totalPages}>&raquo;</Pager.Item>;
   }
 
   renderPreviousPageItem() {
-    return <Pager.Item key={"paginationPrevPageItem"} eventKey={this.props.pageNumber - 1} disabled={this.isOnFirstPage()}>&lsaquo;</Pager.Item>;
+    return this.isOnFirstPage() ? null :  <Pager.Item key={"paginationPrevPageItem"} eventKey={this.props.pageNumber - 1}>&lsaquo;</Pager.Item>;
   }
 
   renderNextPageItem() {
-    return <Pager.Item key={"paginationNextPageItem"} eventKey={this.props.pageNumber + 1} disabled={this.isOnLastPage()}>&rsaquo;</Pager.Item>;
+    return this.isOnLastPage() ? null :  <Pager.Item key={"paginationNextPageItem"} eventKey={this.props.pageNumber + 1}>&rsaquo;</Pager.Item>;
   }
 
   render() {

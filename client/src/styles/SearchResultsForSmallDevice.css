@@ -6,6 +6,15 @@
 .search-result-for-small-device  tr:not(:first-child) > td:before {
   color: #666;
 }
+
+.provider-name {
+  font-weight: bold;
+}
+
+.provider-address:before {
+  content: 'Address : '
+}
+
 .total-discharges:before {
   content: 'Total Discharges : '
 }

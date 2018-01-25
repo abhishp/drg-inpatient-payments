@@ -17,7 +17,7 @@ div.label-container:after {
   content: ' : '
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 768px) {
   .search-form button.btn-primary.search-submit {
     float: none;
   }

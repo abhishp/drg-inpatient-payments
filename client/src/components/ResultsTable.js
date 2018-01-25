@@ -5,17 +5,17 @@ import '../styles/ResultsTable.css'
 class ResultsTable extends Component {
   render() {
     return (
-        <Col md={12} lg={12} xsHidden>
+        <Col sm={12} xsHidden>
           <Table striped bordered responsive condensed className={"search-results"}>
             <thead>
             <tr>
               <th rowSpan={2} className={"th-line-1"}>#</th>
               <th colSpan={5} className={"th-line-1"}>Provider</th>
               <th rowSpan={2} className={"th-line-1"}>HRR Description</th>
-              <th rowSpan={2} className={"th-line-1"}>TD</th>
-              <th rowSpan={2} className={"th-line-1"}>ACC</th>
-              <th rowSpan={2} className={"th-line-1"}>AMP</th>
-              <th rowSpan={2} className={"th-line-1"}>ATP</th>
+              <th rowSpan={2} className={"th-line-1"}>Total Discharges</th>
+              <th rowSpan={2} className={"th-line-1"}>Average Covered Charges</th>
+              <th rowSpan={2} className={"th-line-1"}>Average Medicare Payments</th>
+              <th rowSpan={2} className={"th-line-1"}>Average Total Payments</th>
             </tr>
             <tr>
               <th className={"th-line-2"}>Name</th>

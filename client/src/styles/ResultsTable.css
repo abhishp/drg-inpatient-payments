@@ -1,7 +1,10 @@
 table.search-results .th-line-2 {
   white-space: nowrap;
 }
-
+table.search-results > thead > tr:first-child > th {
+  text-align: center;
+  vertical-align: middle;
+}
 tr.search-result {
   margin: 5%;
   border-bottom: 1px solid #ddd;

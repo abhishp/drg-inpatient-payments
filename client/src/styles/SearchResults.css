@@ -2,3 +2,9 @@ div.search-results-header {
   display: flex;
   align-items: center;
 }
+
+div.search-results-header h2 {
+  font-size: 1.3em;
+  margin-top: 10px;
+  font-weight: bold;
+}

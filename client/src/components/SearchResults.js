@@ -46,15 +46,15 @@ class SearchResults extends Component {
     return (
         <Grid fluid>
           <Row  className={"search-results-header"}>
-            <Col xs={2} md={2} lg={2}>
+            <Col xs={2}>
               <Button bsStyle={"link"} onClick={this.props.showSearchForm}>
                 &larr; Search
               </Button>
             </Col>
-            <Col xs={8} md={8} lg={8}>
+            <Col xs={8}>
               <h2> Search Results</h2>
             </Col>
-            <Col xs={2} md={2} lg={2}/>
+            <Col xs={2}/>
           </Row>
           {this.renderResults()}
         </Grid>

@@ -69,10 +69,10 @@ class NumericFilter extends Component {
 
     return <FormGroup className={"text-box-group"}
                       controlId={this.props.id} validationState={this.validationState()}>
-      <Col xs={12} md={4} lg={4} className={"label-container"}>
+      <Col xs={12} sm={5} md={4} className={"label-container"}>
         <ControlLabel>{this.props.name} Range</ControlLabel>
       </Col>
-      <Col xs={12} md={6} lg={6}>
+      <Col xs={12} sm={7} md={7} lg={6} >
         {this.renderFilterTextBox('min')}
         {this.renderFilterTextBox('max')}
         <HelpBlock className={"validation-error"}>{this.renderError()}</HelpBlock>

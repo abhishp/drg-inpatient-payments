@@ -59,7 +59,7 @@ class TextBox extends Component {
       </InputGroup>
     }
 
-    return <Col xs={12} md={6}>
+    return <Col xs={12} sm={6}>
       {textBoxElement}
     </Col>
   }
