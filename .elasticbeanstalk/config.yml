@@ -8,7 +8,8 @@ environment-defaults:
 global:
   application_name: drg-inpatient-payments-system
   default_ec2_keyname: drg-inpatient-payments
-  default_platform: arn:aws:elasticbeanstalk:eu-west-2::platform/Puma with Ruby 2.3 running on 64bit Amazon Linux/2.6.0
+  default_platform: arn:aws:elasticbeanstalk:eu-west-2::platform/Puma with Ruby 2.3
+    running on 64bit Amazon Linux/2.6.0
   default_region: us-west-1
   include_git_submodules: true
   instance_profile: null
